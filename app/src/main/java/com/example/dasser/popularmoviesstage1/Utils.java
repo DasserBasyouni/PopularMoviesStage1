@@ -4,7 +4,9 @@ package com.example.dasser.popularmoviesstage1;
    Created by Dasser on 21-Mar-18.
  */
 
-class Utils {
+final class Utils {
+
+    private Utils() {}
 
     static String getRateFormat(float rate) {
         return rate + "/10";

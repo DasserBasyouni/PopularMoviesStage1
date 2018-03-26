@@ -14,15 +14,15 @@
         android:theme="@style/AppTheme"
         android:fullBackupContent="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.dasser.popularmoviesstage1.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name="com.example.dasser.popularmoviesstage1.DetailsActivity"
+            android:parentActivityName="com.example.dasser.popularmoviesstage1.MainActivity"/>
     </application>
 
 </manifest>

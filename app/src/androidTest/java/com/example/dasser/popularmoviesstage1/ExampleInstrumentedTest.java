@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.dasser.popularmoviesstage1", appContext.getPackageName());
+        assertEquals("com.example.dasser.popular.movies.stage1", appContext.getPackageName());
     }
 }

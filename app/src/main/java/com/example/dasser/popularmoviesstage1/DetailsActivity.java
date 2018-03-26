@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dasser.popularmoviesstage1.Model.Movie;
+import com.example.dasser.popularmoviesstage1.model.Movie;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    public final String TAG = DetailsActivity.class.getSimpleName();
+    private final String TAG = DetailsActivity.class.getSimpleName();
 
     @BindView(R.id.title_tv) TextView title_tv;
     @BindView(R.id.plotSynopsis_tv) TextView plotSynopsis_tv;
@@ -41,10 +41,10 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void displayMovieDetails(Movie movie, Bitmap bitmap) {
-        title_tv.setText(movie.getOriginal_title());
+        title_tv.setText(movie.getOriginalTitle());
         plotSynopsis_tv.setText(movie.getOverview());
-        releaseDate_tv.setText(Utils.getDateFormat(movie.getRelease_date()));
-        userRate_tv.setText(String.valueOf(Utils.getRateFormat(movie.getVote_average())));
+        releaseDate_tv.setText(Utils.getDateFormat(movie.getReleaseDate()));
+        userRate_tv.setText(String.valueOf(Utils.getRateFormat(movie.getVoteAverage())));
         thumbnail_iv.setImageBitmap(bitmap);
 
         displayViewsAndHideSpan();

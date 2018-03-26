@@ -1,4 +1,4 @@
-package com.example.dasser.popularmoviesstage1.Model;
+package com.example.dasser.popularmoviesstage1.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,21 +9,21 @@ import android.os.Parcelable;
 
 public class Movie implements Parcelable {
 
-    private float vote_average;
-    private String original_title;
-    private String  poster_path;
-    private String overview;
-    private String release_date;
+    private final float vote_average;
+    private final String original_title;
+    private final String  poster_path;
+    private final String overview;
+    private final String release_date;
 
-    public float getVote_average() {
+    public float getVoteAverage() {
         return vote_average;
     }
 
-    public String getOriginal_title() {
+    public String getOriginalTitle() {
         return original_title;
     }
 
-    public String getPoster_path() {
+    public String getPosterPath() {
         return poster_path;
     }
 
@@ -31,7 +31,7 @@ public class Movie implements Parcelable {
         return overview;
     }
 
-    public String getRelease_date() {
+    public String getReleaseDate() {
         return release_date;
     }
 

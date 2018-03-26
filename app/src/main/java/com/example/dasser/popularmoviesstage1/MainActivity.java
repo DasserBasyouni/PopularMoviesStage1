@@ -9,7 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 
-import com.example.dasser.popularmoviesstage1.Retrofit.MoviesAPI;
+import com.example.dasser.popularmoviesstage1.adapter.MoviesAdapter;
+import com.example.dasser.popularmoviesstage1.retrofit.MoviesAPI;
 import com.github.ybq.android.spinkit.SpinKitView;
 
 import butterknife.BindView;
@@ -23,23 +24,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final String TAG = MainActivity.class.getSimpleName();
+    @BindView(R.id.grid_view) GridView gridView;
+    @BindView(R.id.spin_kit) SpinKitView spin_kit;
+
+    private final String TAG = MainActivity.class.getSimpleName();
     private final String popular = "popular";
 
-    public boolean isDataInitialized(int currentDataSortingState) {
-        return dataFromWeb == currentDataSortingState;
+    private boolean allowGetDataFromWeb(int currentRequestedData) {
+        return lastDataState != currentRequestedData;
     }
 
-    private class data {
+    private class Data {
         final static int stillLoading = 0;
         final static int sortedByPopularity = 1;
         final static int sortedByRating = 2;
     }
-    private int dataFromWeb = data.stillLoading;
 
-    @BindView(R.id.grid_view) GridView gridView;
-    @BindView(R.id.spin_kit) SpinKitView spin_kit;
-
+    private int lastDataState = Data.stillLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,28 +63,27 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_popular:
-                if (item.isChecked()) item.setChecked(false);
-                else {
-                    item.setChecked(true);
-                    if (isDataInitialized(data.sortedByPopularity)) {
-                        showLoadingProgress();
-                        setupRetrofit(popular);
-                    }
+                checkMenuItem(item);
+                if (allowGetDataFromWeb(Data.sortedByPopularity)) {
+                    showLoadingProgress();
+                    setupRetrofit(popular);
                 }
                 return true;
             case R.id.action_rated:
-                if (item.isChecked()) item.setChecked(false);
-                else {
-                    item.setChecked(true);
-                    if (isDataInitialized(data.sortedByPopularity)) {
-                        showLoadingProgress();
-                        setupRetrofit("top_rated");
-                    }
+                checkMenuItem(item);
+                if (allowGetDataFromWeb(Data.sortedByRating)) {
+                    showLoadingProgress();
+                    setupRetrofit("top_rated");
                 }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void checkMenuItem(MenuItem item) {
+        if (item.isChecked()) item.setChecked(false);
+        else item.setChecked(true);
     }
 
     private void showLoadingProgress() {
@@ -99,28 +99,24 @@ public class MainActivity extends AppCompatActivity {
 
         MoviesAPI moviesAPI = retrofit.create(MoviesAPI.class);
         Call<MoviesAPI.ResultModel> connection = moviesAPI.getAllMovies(sortBy);
-        Log.i("Z_", "here 1");
         connection.enqueue(new Callback<MoviesAPI.ResultModel>() {
             @Override
             public void onResponse(@NonNull Call<MoviesAPI.ResultModel> call, @NonNull Response<MoviesAPI.ResultModel> response) {
                 MoviesAPI.ResultModel body = response.body();
 
                 if (body != null) {
-                    Log.i("Z_", String.valueOf(response));
-
-                    if (sortBy.equals(popular)) dataFromWeb = data.sortedByPopularity;
-                    else dataFromWeb = data.sortedByRating;
+                    if (sortBy.equals(popular)) lastDataState = Data.sortedByPopularity;
+                    else lastDataState = Data.sortedByRating;
 
                     spin_kit.setVisibility(View.GONE);
                     gridView.setVisibility(View.VISIBLE);
                     gridView.setAdapter(new MoviesAdapter(MainActivity.this, body.getResults()));
                 }
-                Log.i("Z_", "null?");
             }
 
             @Override
             public void onFailure(@NonNull Call<MoviesAPI.ResultModel> call, @NonNull Throwable t) {
-                Log.d(TAG, "connection.enqueue.onFailure: " + t);
+                Log.e(TAG, "connection.enqueue.onFailure: " + t);
             }
         });
     }

@@ -1,6 +1,6 @@
-package com.example.dasser.popularmoviesstage1.Retrofit;
+package com.example.dasser.popularmoviesstage1.retrofit;
 
-import com.example.dasser.popularmoviesstage1.Model.Movie;
+import com.example.dasser.popularmoviesstage1.model.Movie;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface MoviesAPI {
     String api_key_inUrl = "?api_key=";
 
     // TODO please add you API key here to get the app working, have a good day ^_^
-    String apiKey = "";
+    String apiKey = "64bed607af1f9b1c73ec98c70004f5e2";
 
     String lang = "&language=en-US";
     String page = "&page=1";
@@ -25,11 +25,7 @@ public interface MoviesAPI {
     Call<ResultModel> getAllMovies(@Path("ratedOrPopular") String ratedOrPopular);
 
     class ResultModel {
-        private List<Movie> results;
-
-        public ResultModel(List<Movie> results) {
-            this.results = results;
-        }
+        private final List<Movie> results = null;
 
         public List<Movie> getResults() {
             return results;
