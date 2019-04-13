@@ -2,7 +2,7 @@ package com.example.dasser.popularmoviesstage1;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dasser.popularmoviesstage1.model.Movie;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,8 +36,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null)
-            displayMovieDetails((Movie) bundle.getParcelable("movie"),
-                    (Bitmap) bundle.getParcelable("bitmap"));
+            displayMovieDetails(Objects.requireNonNull(bundle.getParcelable("movie")),
+                    bundle.getParcelable("bitmap"));
         else
             Log.e(TAG, "Error staring Activity");
     }

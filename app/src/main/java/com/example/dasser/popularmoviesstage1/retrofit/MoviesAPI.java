@@ -1,5 +1,6 @@
 package com.example.dasser.popularmoviesstage1.retrofit;
 
+import com.example.dasser.popularmoviesstage1.BuildConfig;
 import com.example.dasser.popularmoviesstage1.model.Movie;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface MoviesAPI {
     String api_key_inUrl = "?api_key=";
 
     // TODO please add you API key here to get the app working, have a good day ^_^
-    String apiKey = "64bed607af1f9b1c73ec98c70004f5e2";
+    String apiKey = BuildConfig.THE_MOVIE_DB_API_TOKEN;
 
     String lang = "&language=en-US";
     String page = "&page=1";
