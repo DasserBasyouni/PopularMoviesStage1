@@ -14,10 +14,10 @@ Most of us can relate to kicking back on the couch and enjoying a movie with fri
 
 ## What this app is doing
 -   Present the user with a grid arrangement of movie posters upon launch.
- -  Allow your user to change sort order via a 3-dots menu popup that offers most popular or by highest-rated sorting modes.
- -   Allow the user to tap on a movie poster and transition to a details screen with additional information such as: original title, movie poster image thumbnail, A plot synopsis (called overview in the api), user rating (called vote_average in the api), and release date.
+-   Allow your user to change sort order via a 3-dots menu popup that offers most popular or by highest-rated sorting modes.
+-   Allow the user to tap on a movie poster and transition to a details screen with additional information such as: original title, movie poster image thumbnail, A plot synopsis (called overview in the api), user rating (called vote_average in the api), and release date.
 
 ## What I have learnt from the app
--  Fetching data from the Internet with theMovieDB API.
--  Using adapters and custom list layouts to populate list views.
--  Icorporating libraries to simplify the amount of code you need to write
+-   Fetching data from the Internet with theMovieDB API.
+-   Using adapters and custom list layouts to populate list views.
+-   Icorporating libraries to simplify the amount of code you need to write
